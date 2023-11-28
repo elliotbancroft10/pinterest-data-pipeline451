@@ -1,14 +1,14 @@
-###Pinterest Data Pipeline
+### Pinterest Data Pipeline
 
-##Contents
+## Contents
 
-##About the project
+## About the project
 What it does, aims, what I learned
 
-##Installation
+## Installation
 
-##Usage
+## Usage
 
-##File Structure
+## File Structure
 
-##Licence Information
+## Licence Information
