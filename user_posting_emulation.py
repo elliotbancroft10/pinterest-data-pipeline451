@@ -5,13 +5,14 @@ import random
 from multiprocessing import Process
 import boto3
 import json
+from json import JSONEncoder
 import sqlalchemy
 from sqlalchemy import text
-from kafka import KafkaConsumer
+
 
 random.seed(100)
 
-class DateTimeEncoder(json.JSONEncoder):
+class DateTimeEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
             return obj.isoformat()
@@ -31,11 +32,12 @@ class AWSDBConnector:
         engine = sqlalchemy.create_engine(f"mysql+pymysql://{self.USER}:{self.PASSWORD}@{self.HOST}:{self.PORT}/{self.DATABASE}?charset=utf8mb4")
         return engine
 
-
 new_connector = AWSDBConnector()
 
+my_bootstrap_servers = "b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098"
+
 # Number of posts to make, 1 post indicates 1 post of pin, geo and user data
-post_limit = 1
+post_limit = 20
 
 topic_dict = {'12869112c9e5.pin':'Pinterest Data', 
               '12869112c9e5.geo':'Geographic Data',
@@ -43,28 +45,30 @@ topic_dict = {'12869112c9e5.pin':'Pinterest Data',
 
 def send_to_kafka(data, topic_name):
     invoke_url = f"https://x84i29wg1c.execute-api.us-east-1.amazonaws.com/12869112c9e5/topics/{topic_name}"
-    headers = {'Content-Type': 'application/vnd.kafka.json.v2+json'}
-    #'Content-Type': 'application/vnd.kafka.json.v2+json'
+    headers = {'Content-Type':  'application/vnd.kafka.json.v2+json'}
+
     if topic_name == '12869112c9e5.pin':
         corrected_data = data
     else:
         corrected_data = {key.replace('ind', 'index'): value for key, value in data.items()}
-    payload = json.dumps({
-        "topic": topic_dict[topic_name],
-        "payload":[corrected_data]}, default=str)#, cls=DateTimeEncoder) 
-    response = requests.post(invoke_url, headers=headers, data=payload)
-    print(response.status_code)
-    print(payload)
 
-    #bootstrap_servers = 'b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098'
-    #consumer = KafkaConsumer(topic_name, bootstrap_servers=bootstrap_servers)
-    #for message in consumer:
-    #    print(f"Received message: {message.value}")
+    payload = json.dumps({
+        "records":[
+            {"value": corrected_data}
+            ]
+        }, cls=DateTimeEncoder)
+
+    # Use the custom encoder for datetime objects
+    # json_payload = json.dumps(payload, cls=DateTimeEncoder).encode("ascii")
+    response = requests.request("POST", invoke_url, headers=headers, data=payload)
+    print(payload)
+    print(response.status_code)
+    print(response.json())  # Print the response from the API Gateway
 
 def run_infinite_post_data_loop():
     post_counter = 0
 
-    while post_counter < post_limit:
+    while True: #post_counter < post_limit:
         sleep(random.randrange(0, 2))
         random_row = random.randint(0, 11000)
         engine = new_connector.create_db_connector()
@@ -101,5 +105,4 @@ if __name__ == "__main__":
     run_infinite_post_data_loop()
 
 print(f"{post_limit} results posted successfully!")
-    
 
