@@ -7,6 +7,8 @@ This project retrieves pinterest, user and geographical data from an RDS dataset
 
 To transfer the data into the S3 bucket, an API was created using AWS API Gateway, which in turn allows the data to be sent via the MSK cluster, to the connected S3 bucket using the IAM MSK authentication package.
 
+Once the 3 bucket had been mounted to DataBricks, a series of queries and analysis were performed and can be found in pinterest_df_manipulation.ipynb.
+
 ## Installation
  - You will need to sign in to the AWS console as an IAM user
  - Create and store a .pem key pair file relating to your EC2 instance and store it in a local directory that will be used to configure your EC2 Kafka Client
