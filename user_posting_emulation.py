@@ -36,9 +36,6 @@ new_connector = AWSDBConnector()
 
 my_bootstrap_servers = "b-1.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-2.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098,b-3.pinterestmskcluster.w8g8jt.c12.kafka.us-east-1.amazonaws.com:9098"
 
-# Number of posts to make, 1 post indicates 1 post of pin, geo and user data
-post_limit = 20
-
 topic_dict = {'12869112c9e5.pin':'Pinterest Data', 
               '12869112c9e5.geo':'Geographic Data',
               '12869112c9e5.user':'User Data'}
@@ -58,17 +55,15 @@ def send_to_kafka(data, topic_name):
             ]
         }, cls=DateTimeEncoder)
 
-    # Use the custom encoder for datetime objects
-    # json_payload = json.dumps(payload, cls=DateTimeEncoder).encode("ascii")
     response = requests.request("POST", invoke_url, headers=headers, data=payload)
     print(payload)
     print(response.status_code)
-    print(response.json())  # Print the response from the API Gateway
+    print(response.json()) 
 
 def run_infinite_post_data_loop():
     post_counter = 0
 
-    while True: #post_counter < post_limit:
+    while True:
         sleep(random.randrange(0, 2))
         random_row = random.randint(0, 11000)
         engine = new_connector.create_db_connector()
