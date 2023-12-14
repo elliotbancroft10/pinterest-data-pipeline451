@@ -1,26 +1,42 @@
 ### Pinterest Data Pipeline
+# An AICore Data Engineering Project
 
 ## Contents
+1. [Project Synopsis](#project_synopsis)
+2. [Project Resources](#project_resources)
+3. [Data](#data)
+4. [Setup and Usage](#setup_and_usage)
+5. [File Structure](#file_structure)
 
-## About the project
+## Project Synopsis <a name="project_synopsis"></a>
 This project retrieves pinterest, user and geographical data from an RDS dataset. The data is then stored in a DataBricks mounted S3 bucket.
 
 To transfer the data into the S3 bucket, an API was created using AWS API Gateway, which in turn allows the data to be sent via the MSK cluster, to the connected S3 bucket using the IAM MSK authentication package.
 
 Once the 3 bucket had been mounted to DataBricks, a series of queries and analysis were performed and can be found in pinterest_df_manipulation.ipynb.
 
-## Installation
- - You will need to sign in to the AWS console as an IAM user
- - Create and store a .pem key pair file relating to your EC2 instance and store it in a local directory that will be used to configure your EC2 Kafka Client
- - Connect to the SSH client
- - Install Kafka in your EC2 client ensuring the version is compatible with the version your MSK cluster is running on
- - If your cluster needs IAM authentication, install the IAM MSK authentication package in your client
- - Make sure you have the necessary permissions to access the MSK cluster, you may need an IAM role for this
- - Create your Kafka topics within your EC2 client 
+## Project Resources <a name="project_resources"></a>
+* [Apache Kafka](https://kafka.apache.org/documentation/)
+  <details>
+    <summary><strong>Click to expand</strong></summary>
+    <p style="background-color: #FFAF82; padding: 10px;">
+      This is the subtext with a small grey banner.
+    </p>
+  </details>
 
+* [Apache Spark](https://spark.apache.org/docs/latest/)
+  <details>
+    <summary><strong>Click to expand</strong></summary>
+    <p style="background-color: #FFAF82; padding: 10px;">
+      This is the subtext with a small grey banner.
+    </p>
+  </details>
 
-## Usage
+# AWS Resources
+* The [requests](https://docs.python-requests.org/en/latest/) package is commonly used for making HTTP requests in Python.
 
-## File Structure
+## Data <a name="data"></a>
 
-## Licence Information
+## Setup and Usage <a name="setup_and_usage"></a>
+
+## File Structure <a name="file_structure"></a>
