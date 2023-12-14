@@ -1,5 +1,5 @@
-### Pinterest Data Pipeline
-# An AICore Data Engineering Project
+# Pinterest Data Pipeline
+### An AICore Data Engineering Project
 
 ## Contents
 1. [Project Synopsis](#project_synopsis)
@@ -19,7 +19,7 @@ Once the 3 bucket had been mounted to DataBricks, a series of queries and analys
 * [Apache Kafka](https://kafka.apache.org/documentation/)
   <details>
     <summary><strong>Click to expand</strong></summary>
-    <p style="background-color: #FFAF82; padding: 10px;">
+    <p style="background-color: #a2f2ff; padding: 10px;">
       This is the subtext with a small grey banner.
     </p>
   </details>
@@ -27,12 +27,12 @@ Once the 3 bucket had been mounted to DataBricks, a series of queries and analys
 * [Apache Spark](https://spark.apache.org/docs/latest/)
   <details>
     <summary><strong>Click to expand</strong></summary>
-    <p style="background-color: #FFAF82; padding: 10px;">
+    <p style="background-color: #a2f2ff; padding: 10px;">
       This is the subtext with a small grey banner.
     </p>
   </details>
 
-# AWS Resources
+### AWS Resources
 * The [requests](https://docs.python-requests.org/en/latest/) package is commonly used for making HTTP requests in Python.
 
 ## Data <a name="data"></a>
