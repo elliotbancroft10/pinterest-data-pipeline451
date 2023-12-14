@@ -17,9 +17,9 @@ Once the 3 bucket had been mounted to DataBricks, a series of queries and analys
 
 ## Project Resources <a name="project_resources"></a>
 * [Apache Kafka](https://kafka.apache.org/documentation/)
-   <details>
+  <details>
     <summary><strong>Details</strong></summary>
-    <div class="details-content">
+    <div style="background-color: #f0f0f0; padding: 10px; margin: 10px 0;">
       This is additional information for Item 2.
     </div>
   </details>
@@ -27,23 +27,10 @@ Once the 3 bucket had been mounted to DataBricks, a series of queries and analys
 * [Apache Spark](https://spark.apache.org/docs/latest/)
   <details>
     <summary><strong>Details</strong></summary>
-    <div class="details-content">
+    <div style="background-color: #f0f0f0; padding: 10px; margin: 10px 0;">
       This is additional information for Item 2.
     </div>
   </details>
-
-<style>
-  details {
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-
-  .details-content {
-    background-color: #a2f2ff;
-    padding: 10px;
-  }
-</style>
 
 ### AWS Resources
 * The [requests](https://docs.python-requests.org/en/latest/) package is commonly used for making HTTP requests in Python.
